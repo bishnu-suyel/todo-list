@@ -46,4 +46,13 @@ class TaskController extends Controller
     
         return redirect()->route('tasks.index')->withErrors('You are not authorized to delete this task.');
     }
+    public function update(Request $request, $id)
+{
+    $task = Task::findOrFail($id);
+    $task->completed = $request->has('completed'); // Set to true if checkbox is checked
+    $task->save();
+
+    return redirect()->back();
+}
+
 }    
